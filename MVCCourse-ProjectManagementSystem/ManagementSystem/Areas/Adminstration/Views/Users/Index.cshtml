@@ -1,0 +1,45 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "title";
+}
+
+<h2>title</h2>
+
+
+@(Html
+    .Kendo()
+    .Grid<ManagementSystem.Areas.Adminstration.ViewModels.UserEditModel>()
+    .Name("Users")
+    .Columns(columns => 
+        {
+            columns.Bound(u => u.Username).Width(150);
+            columns.Bound(u => u.FullName).Width(150);
+            columns.Bound(u => u.Email).Width(150);
+            columns.Bound(u => u.AboutMe).Width(150).HtmlAttributes(new { @class = "td-description"});;
+            columns.Command(command => { command.Edit(); command.Destroy(); });
+        })
+    .Editable(editable=>editable.Mode(GridEditMode.PopUp))
+    .Sortable()
+    .Pageable()
+    .Events(events=> events.Edit("edit"))
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .PageSize(5)
+        .Model(model => 
+            {
+                model.Id(u=> u.Id);                
+            })    
+        .Read(read => read.Action("Read", "Users"))
+        .Update(update => update.Action("Update","Users"))
+        .Destroy(destroy=> destroy.Action("Destroy","Users"))    
+        ))
+
+<script>
+
+    function edit(e) {
+        if (e.model.isNew() == false) {
+            $(e.container).find('input[name="Username"]').attr("readonly", true);
+        }
+    }
+</script>

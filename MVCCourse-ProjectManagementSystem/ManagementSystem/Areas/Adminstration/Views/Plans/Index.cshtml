@@ -1,0 +1,90 @@
+﻿@using ManagementSystem.Areas.Adminstration.ViewModels;
+
+@{
+    ViewBag.Title = "Plans Administration";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@(Html.Kendo()
+  .Grid<PlanViewModel>()
+  .Name("grid-plans")
+    .Columns(cols =>
+    {
+        cols.Bound(model => model.Title);
+        cols.Bound(model => model.Description).HtmlAttributes(new { @class = "td-description"});
+        cols.Bound(model => model.Owner).ClientTemplate("#=OwnerName#");
+        cols.Command(command =>
+        {
+            command.Edit();
+            command.Destroy();
+        }).Title("Actions");
+    })
+    .ToolBar(tool => tool.Create().Text("Create New Plan"))
+    .Pageable()
+    .Groupable()
+    .Sortable()
+    .Editable(edit => edit.Mode(GridEditMode.PopUp))
+    .DataSource(data => data.Ajax()
+        .Sort(sort => sort.Add("Title").Ascending())
+        .Model(model =>
+        {
+            model.Id(b => b.Id);
+            model.Field(b => b.Id).Editable(false);
+            @*model.Field(b => b.Participants).Editable(true);*@
+        })
+        .PageSize(5)
+        .ServerOperation(true)
+        .Read(read=> read.Action("ReadPlans", "Plans").Data("sendAntiForgery"))
+        .Update(update=> update.Action("UpdatePlan","Plans").Data("sendAntiForgery"))
+        .Destroy("DeletePlan","Plans")
+        .Create(create=> create.Action("CreatePlan","Plans").Data("sendAntiForgery"))))
+    @*.ClientDetailTemplateId("studentsDetails"))*@
+
+<script>
+    $(document).ready(function () {
+        var required = $("#required").data("kendoMultiSelect");
+
+        //$("#get").click(function () {
+        //    alert("Attendees:\n\nRequired: " + required.value());
+        //});
+    });
+</script>
+
+@*<script id="studentsDetails" type="text/x-kendo-template">
+    @(Html.Kendo()
+    .Grid<UserViewModel>()
+    .Name("grid")
+    .Columns(cols =>
+    {
+        cols.Bound(model => model.Username);
+        cols.Command(command =>
+        {
+            command.Edit();
+            command.Destroy();
+        });
+    })
+    .ToolBar(tool => tool.Create().Text("Add new user"))
+    .Pageable()
+    .Sortable()
+    .Editable(edit => edit.Mode(GridEditMode.PopUp))
+    .DataSource(data => data.Ajax()
+            .Model(model =>
+            {
+                model.Id(b => b.UserId);
+                model.Field(b => b.UserId).Editable(false);
+            })
+            .PageSize(5)
+            .ServerOperation(true)
+            .Read("ReadPlanUsers", "Plans")
+            .Update("UpdatePlan","Plans")
+            .Destroy("DeletePlan","Plans")
+            .Create("CreatePlan","Plans"))
+            .ToClientTemplate())
+</script>*@
+
+<script type="text/javascript">
+    function sendAntiForgery() {
+        return { "__RequestVerificationToken": $('input[name=__RequestVerificationToken]').val() };
+    }
+</script>

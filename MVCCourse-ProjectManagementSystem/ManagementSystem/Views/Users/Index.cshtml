@@ -1,0 +1,71 @@
+﻿@model ManagementSystem.ViewModels.UserViewModel
+@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = Model.Profile.Username;
+}
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        @Html.Partial("_Profile", Model.Profile)
+
+        <div id="userProjects" class="span9">
+            <div>
+                <div class="page-header">
+                    <h4>
+                        <span>Plans</span>
+                        <small>(<span>@Model.MyPlans.Count</span>)</small>
+                        @if (User.Identity.IsAuthenticated && User.Identity.GetUserId() == Model.Id)
+                        {
+                            @Html.ActionLink("Add New", "Create", new { controller = "Plans" }, new { @class = "btn btn-mini btn-primary pull-right" })
+                        }
+                    </h4>
+                </div>
+                <ul class="thumbnails">
+                    @foreach (var plan in Model.MyPlans)
+                    {
+                        <li class="span3">
+                            <div class="thumbnail text-center">
+                                <h3 class="project-heading">
+                                    @{
+                                        string planTitle=string.Empty;
+                                        if (plan.Title.Length > 100)
+                                        {
+                                            planTitle = plan.Title.Substring(0, 50) + "...";
+                                            <h3>@Html.ActionLink(planTitle, "Details", new { controller = "Plans", id = plan.Id }, new { @class = "project-heading" })</h3>
+                                        }
+                                        else
+                                        {
+                                            <h3>@Html.ActionLink(plan.Title, "Details", new { controller = "Plans", id = plan.Id }, new { @class = "project-heading" })</h3>
+                                        }
+                                    }
+                                </h3>
+                            </div>
+                        </li>
+                    }
+
+                </ul>
+            </div>
+            <div>
+                <div class="page-header">
+                    <h4>
+                        <span>Plan Participatory</span>
+                        <small>(<span>@Model.AllPlans.Count</span>)</small>
+                    </h4>
+                </div>
+                <ul class="thumbnails">
+                    @foreach (var plan in Model.AllPlans)
+                    {
+                        <li class="span3">
+                            <div class="thumbnail text-center">
+                                <h3>@Html.ActionLink(plan.Title, "Details", new { controller = "Plans", id = plan.Id }, new { @class = "project-heading" })</h3>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+

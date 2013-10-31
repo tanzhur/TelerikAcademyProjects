@@ -1,0 +1,8 @@
+﻿@*@model ManagementSystem.Areas.Adminstration.ViewModels.ParticipantViewModel
+
+@(Html.Kendo().MultiSelectFor(m=>m)
+    .BindTo((System.Collections.IEnumerable)ViewData["participants"])
+    .DataTextField("ParticipantUsername")
+    .DataValueField("ParticipantId")
+    .Name("required")
+    .Placeholder("Select attendees..."))*@

@@ -1,0 +1,15 @@
+﻿@model ManagementSystem.ViewModels.ProfileViewModel
+
+<div id="userInfo" class="span3">
+    <div class="page-header clearfix text-center">
+        @Html.GravatarImage(Model.Email, 200,cssClass : "img-rounded")
+        <hr>
+        <h4>
+            @Html.ActionLink(Model.FullName, "Index", "Users", new { id = Model.Id })
+        </h4>
+        <p>
+            <strong>@Model.Email</strong>
+        </p>
+    </div>
+    <p>@Model.AboutMe</p>
+</div>

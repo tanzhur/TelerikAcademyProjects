@@ -1,0 +1,8 @@
+﻿
+@model ManagementSystem.Models.State
+@using ManagementSystem.Models
+
+@(Html.Kendo().DropDownListFor(model=>model)
+.BindTo(from State state in  Enum.GetValues(typeof(State))
+select new SelectListItem(){Text = state.ToString(),Value =((int)state).ToString()}))
+

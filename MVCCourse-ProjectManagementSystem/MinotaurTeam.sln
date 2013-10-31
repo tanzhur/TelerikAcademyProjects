@@ -1,0 +1,54 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.20827.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManagementSystem", "ManagementSystem\ManagementSystem.csproj", "{F66F18CA-DA97-45AF-AAED-E88AB1D8C085}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManagementSystem.Models", "ManagementSystem.Models\ManagementSystem.Models.csproj", "{3774BA5D-63E3-44B7-9B0F-31E4B99C3072}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManagementSystem.Data", "ManagementSystem.Data\ManagementSystem.Data.csproj", "{7D315BB8-77B2-411D-A624-C398B46EE63E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "External Libraries", "External Libraries", "{091DC1A0-1FE3-464D-8B2C-DD86ECB8EF78}"
+	ProjectSection(SolutionItems) = preProject
+		ExternalLibraries\Kendo.Mvc.dll = ExternalLibraries\Kendo.Mvc.dll
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs17
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ManagementSystem\\ManagementSystem.csproj
+		SccProjectName1 = ManagementSystem
+		SccLocalPath1 = ManagementSystem
+		SccProjectUniqueName2 = ManagementSystem.Models\\ManagementSystem.Models.csproj
+		SccProjectName2 = ManagementSystem.Models
+		SccLocalPath2 = ManagementSystem.Models
+		SccProjectUniqueName3 = ManagementSystem.Data\\ManagementSystem.Data.csproj
+		SccProjectName3 = ManagementSystem.Data
+		SccLocalPath3 = ManagementSystem.Data
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F66F18CA-DA97-45AF-AAED-E88AB1D8C085}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F66F18CA-DA97-45AF-AAED-E88AB1D8C085}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F66F18CA-DA97-45AF-AAED-E88AB1D8C085}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F66F18CA-DA97-45AF-AAED-E88AB1D8C085}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3774BA5D-63E3-44B7-9B0F-31E4B99C3072}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3774BA5D-63E3-44B7-9B0F-31E4B99C3072}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3774BA5D-63E3-44B7-9B0F-31E4B99C3072}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3774BA5D-63E3-44B7-9B0F-31E4B99C3072}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D315BB8-77B2-411D-A624-C398B46EE63E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D315BB8-77B2-411D-A624-C398B46EE63E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D315BB8-77B2-411D-A624-C398B46EE63E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D315BB8-77B2-411D-A624-C398B46EE63E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

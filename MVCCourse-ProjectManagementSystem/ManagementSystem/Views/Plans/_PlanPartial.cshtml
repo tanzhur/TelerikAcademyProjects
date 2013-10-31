@@ -1,0 +1,49 @@
+﻿@model ManagementSystem.Models.Plan
+@using Microsoft.AspNet.Identity
+
+<li class="span4 plan-item" style="margin-bottom: 25px">
+    <div class="thumbnail" style="padding: 0">
+        <div class="caption">
+            <h3>
+                @{
+                    string modelTitle = Model.Title;
+                    if (Model.Title.Length > 40)
+                    {
+                        modelTitle = modelTitle.Substring(0, 20) + "...";
+                        @Html.ActionLink(modelTitle, "Details", new { id = Model.Id }, new { @class = "plan-title" })
+                    }
+                    else
+                    {
+                        @Html.ActionLink(modelTitle, "Details", new { id = Model.Id }, new { @class = "plan-title" })
+                    }
+                    if (User.Identity.IsAuthenticated && Model.Owner.Id == User.Identity.GetUserId())
+                    {
+                        <a href="@Url.Action("Edit", "Plans", new { id = Model.Id})" class="btn btn-mini">
+                            <span class="icon-edit"></span>
+                        </a>
+                    }
+                }
+            </h3>
+            <p class="plan-description">
+                @{
+                    if (Model.Description.Length > 100)
+                    {
+                        @Html.DisplayFor(model => model.Description).ToString().Substring(0, 100)
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(model => model.Description)
+                    }
+                }
+            </p>
+            <p>
+                <i class="icon icon-star"></i>
+                @Html.ActionLink(Model.Owner.UserName, "Index", "Users", new { id = Model.Owner.Id }, new { @class = "username-text" })
+            </p>
+            <p>
+                <i class="icon icon-user"></i>
+                @Html.DisplayFor(model => model.Participants.Count) Participants
+            </p>
+        </div>
+    </div>
+</li>

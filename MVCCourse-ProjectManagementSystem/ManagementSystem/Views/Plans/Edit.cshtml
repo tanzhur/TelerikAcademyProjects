@@ -1,0 +1,76 @@
+﻿@model ManagementSystem.Models.Plan
+
+@{
+    ViewBag.Title = "Edit";
+    var participants = Model.Participants.Select(p => p.ApplicationUser.UserName).ToList();
+
+}
+
+<h2>@Html.DisplayFor(model => model.Title)</h2>
+
+@for (int i = 0; i < participants.Count; i++)
+{
+    @participants[i]
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset class="form-horizontal">
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="control-group">
+            @Html.LabelFor(model => model.Title, new { @class = "control-label" })
+            <div class="controls">
+                @Html.EditorFor(model => model.Title)
+                @Html.ValidationMessageFor(model => model.Title, null, new { @class = "help-inline" })
+            </div>
+        </div>
+
+        <div class="control-group">
+            @Html.LabelFor(model => model.Description, new { @class = "control-label" })
+            <div class="controls">
+                @Html.EditorFor(model => model.Description)
+                @Html.ValidationMessageFor(model => model.Description, null, new { @class = "help-inline" })
+            </div>
+        </div>
+
+        @*@(Html.Kendo().MultiSelect()
+    .Name("participants") //The name of the multiselect is mandatory. It specifies the "id" attribute of the widget.
+    .DataTextField("UserName") //Specifies which property of the Product to be used by the multiselect as a text.
+    .DataValueField("Id") //Specifies which property of the Product to be used by the multiselect as a value.
+    .MinLength(3)
+    .Filter(FilterType.Contains)
+    .DataSource(source =>
+    {
+        source.Read(read =>
+        {
+            read.Action("GetParticipants", "Plans")
+                 .Data("onAdditionalData");  //Set the Action and Controller name
+        })
+        .ServerFiltering(true); //If true the DataSource will not filter the data on the client.
+    }))*@
+
+
+        <div class="form-actions no-color">
+            @Html.ActionLink("Back", "Details", new { id = Model.Id }, new { @class = "btn btn-small" })
+            <input type="submit" value="Save" class="btn btn-small btn-success" />
+        </div>
+
+    </fieldset>
+}
+
+<script>
+    function onAdditionalData() {
+        console.log($("#participants").data('kendoMultiSelect').input.val())
+        return {
+            text: $("#participants").val()
+        };
+    }
+</script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

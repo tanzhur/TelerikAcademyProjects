@@ -1,0 +1,46 @@
+﻿@using ManagementSystem.Models
+@model ManagementSystem.Models.Todo
+@{
+    var state = @Html.DisplayFor(model => model.State);
+}
+
+<tr
+    @switch (Model.Priority)
+    {
+        case Priority.Normal:
+            break;
+        case Priority.Important:
+            @:class="warning"
+            break;
+        case Priority.Critical:
+            @:class="error"
+            break;
+    }
+    
+    data-original-title="@Html.DisplayFor(model => model.Description)">
+
+    <td class="todo-title">@Html.DisplayFor(model => model.Title)</td>
+    <td>@Model.DateCreated.ToShortDateString()</td>
+    <td>
+        @switch (Model.State)
+        {
+            case State.Pending:
+                <span class="label">Pending</span>
+                break;
+            case State.InProgress:
+            <span class="label label-important">In Progress</span>
+                break;
+            case State.InTesting:
+            <span class="label label-warning">In Testing</span>
+                break;
+            case State.Completed:
+            <span class="label label-success">Completed</span>
+                break;
+        }
+    </td>
+    <td>
+        <a href="@Url.Action("Edit", "Todos", new { area = "", id = Model.Id })" class="icon-edit"></a>
+        <a href="@Url.Action("Delete", "Todos", new { area = "", id = Model.Id })"class="icon-remove"></a>
+    </td>
+</tr>
+

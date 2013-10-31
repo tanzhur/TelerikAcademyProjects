@@ -1,0 +1,7 @@
+﻿
+@model ManagementSystem.Models.Priority
+@using ManagementSystem.Models
+
+@(Html.Kendo().DropDownListFor(model=>model)
+.BindTo(from Priority priority in  Enum.GetValues(typeof(Priority))
+select new SelectListItem(){Text = priority.ToString(),Value =((int)priority).ToString()}))

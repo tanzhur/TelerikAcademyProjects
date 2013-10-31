@@ -1,0 +1,58 @@
+﻿@using ManagementSystem.Areas.Adminstration.ViewModels;
+
+@{
+    ViewBag.Title = "Todos Administration";
+}
+
+@Html.AntiForgeryToken()
+
+<h2>@ViewBag.Title</h2>
+
+@(Html.Kendo()
+  .Grid<TodoViewModel>()
+  .Name("grid-todos")
+    .Columns(cols =>
+    {
+        cols.Bound(model => model.Title);
+        cols.Bound(model => model.Description).HtmlAttributes(new { @class = "td-description"});
+        cols.Bound(model => model.Plan).ClientTemplate("#=PlanName#").EditorTemplateName("PlansDropDown");
+        cols.Bound(model => model.Priority).EditorTemplateName("PriorityDropDown");
+        cols.Bound(model => model.State).EditorTemplateName("StateDropDown");
+        cols.Command(command =>
+        {
+            command.Edit();
+            command.Destroy();
+        }).Title("Actions");
+    })
+    .ToolBar(tool => tool.Create().Text("Create New Todo"))
+    .Pageable()
+    .Sortable()
+    .Groupable()
+    .Editable(edit => edit.Mode(GridEditMode.PopUp))
+    .DataSource(data => data.Ajax()
+        .Sort(sort => sort.Add("PlanName").Ascending())
+        .Model(model =>
+        {
+            model.Id(t =>t.Id);
+            model.Field(b => b.Id).Editable(false);
+        })
+        .PageSize(5)
+        .ServerOperation(true)
+        .Read(read=> read.Action("ReadTodos", "Todoes").Data("sendAntiForgery"))
+        .Update(update=> update.Action("UpdateTodo","Todoes").Data("sendAntiForgery"))
+        .Destroy("DeleteTodo","Todoes")
+        .Create(create=> create.Action("CreateTodo","Todoes").Data("sendAntiForgery"))))
+
+<script type="text/javascript">
+    function sendAntiForgery() {
+        return { "__RequestVerificationToken": $('input[name=__RequestVerificationToken]').val() };
+    }
+    
+    //To disable Edit of some field in the grid---
+    //function edit(e) {
+    //    if (e.model.isNew() == false) {
+    //        $(e.container).find('input[name="Title"]').attr("readonly", true);
+    //    }
+    //}
+</script>
+

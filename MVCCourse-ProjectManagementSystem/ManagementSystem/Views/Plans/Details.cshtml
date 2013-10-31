@@ -1,0 +1,98 @@
+﻿@model ManagementSystem.Models.Plan
+@using ManagementSystem.Models;
+@using Microsoft.AspNet.Identity;
+
+@{
+    ViewBag.Title = @Html.DisplayFor(model => model.Title);
+}
+
+<div class="row">
+    <h2 class="span12">
+        <span class="details-title">
+            @Html.DisplayFor(model => model.Title)
+        </span>
+        @if (User.Identity.IsAuthenticated && User.Identity.GetUserId() == Model.Owner.Id)
+        {
+            <span class="pull-right">
+                @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-small btn-primary" })
+                @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn btn-small btn-warning" })
+            </span>
+        }
+    </h2>
+</div>
+
+<fieldset>
+    <dl>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Owner)
+        </dt>
+        <dd>
+            <a href="@Url.Action("Index", "Users", new { id = Model.Owner.Id})">
+                <strong>@Html.DisplayFor(model => model.Owner.FullName)</strong>
+            </a>
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd class="details-description">
+            @Html.DisplayFor(model => model.Description)
+            </dd>
+
+        @if (User.Identity.IsAuthenticated && (User.Identity.GetUserId() == Model.Owner.Id || Model.Participants.Any(p => p.Id == User.Identity.GetUserId())))
+        {
+            <dt>
+                <p>
+                    @Html.DisplayNameFor(model => model.Todos) <small>(@Html.DisplayFor(model => model.Todos.Count))</small>
+                    <a href="@Url.Action("Create", "Todos", new { area = "", id = Model.Id })" class="pull-right btn btn-mini btn-primary"><span class="icon-plus"></span> Create</a>
+                </p>
+            </dt>
+            <dd>
+                <table class="table table-condensed">
+                    <tbody>
+                        @foreach (var todo in Model.Todos)
+                        {
+                            @Html.Partial("_TodoPartial", todo)
+                        }
+                    </tbody>
+                </table>
+            </dd>
+        }
+
+        @if (Model.Participants.Count != 0)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.Participants) <small>(@Html.DisplayFor(model => model.Participants.Count))</small>
+            </dt>
+            <dd>
+                <div class="participant-list">
+                    @foreach (var participant in Model.Participants)
+                    {
+                        @Html.Partial("_ParticipantPartial", participant)
+                    }
+                </div>
+            </dd>
+        }
+
+    </dl>
+</fieldset>
+<p>
+    @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-small" })
+</p>
+
+@section Scripts {
+    <script>
+        (function () {
+            $('table').tooltip({
+                selector: 'tr[rel=tooltip]'
+            });
+
+            var container = $('.participant-list')[0];
+            var msnry = new Masonry(container, {
+                itemSelector: '.participant-item'
+            });
+        }())
+    </script>
+}

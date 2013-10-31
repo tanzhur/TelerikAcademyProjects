@@ -1,0 +1,20 @@
+﻿@using ManagementSystem.Models
+@model ManagementSystem.Models.Participant
+
+<div class="span3 well participant-item" style="padding: 8px">
+    <div class="row">
+        <div class="span1">
+            <a href="@Url.Action("Index", "Users", new { id = Model.Id})" class="thumbnail">
+                @Html.GravatarImage(Model.ApplicationUser.Email, 96)
+            </a>
+        </div>
+        <div class="span2">
+            <p>@Html.DisplayFor(model => model.ApplicationUser.UserName)</p>
+            <p>
+                <strong>@Html.DisplayFor(model => model.ApplicationUser.FullName)</strong>
+            </p>
+            <span class="badge badge-info">@Model.Plans.Where(p => p.Owner.Id == Model.Id).Count() plans</span>
+            <span class="badge badge-warning">@Model.Plans.Where(p => p.Participants.Any(pp => pp.Id == Model.Id)).Count() participations</span>
+        </div>
+    </div>
+</div>

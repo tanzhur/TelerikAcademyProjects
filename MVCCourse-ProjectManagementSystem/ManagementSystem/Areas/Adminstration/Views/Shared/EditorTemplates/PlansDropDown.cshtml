@@ -1,0 +1,6 @@
+﻿@model ManagementSystem.Areas.Adminstration.ViewModels.SamplePlanViewModel
+
+@(Html.Kendo().DropDownListFor(m=>m)
+    .BindTo((System.Collections.IEnumerable)ViewData["plans"])
+    .DataTextField("PlanName")
+    .DataValueField("PlanName"))

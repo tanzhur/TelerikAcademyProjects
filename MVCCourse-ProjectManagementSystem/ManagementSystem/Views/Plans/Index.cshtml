@@ -1,0 +1,39 @@
+﻿@using Microsoft.AspNet.Identity
+@model IEnumerable<ManagementSystem.Models.Plan>
+
+@{
+    ViewBag.Title = "Plans";
+}
+
+<div class="row">
+    <h2 class="span12">
+        <span>Plans</span>
+        <small>(@Model.Count())</small>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <span class="pull-right">
+                @Html.ActionLink("Create", "Create", null, new { @class = "btn btn-small btn-primary" })
+            </span>
+        }
+    </h2>
+</div>
+
+<div class="row">
+    <ul class="plans-list unstyled">
+        @foreach (var plan in Model)
+        {
+            @Html.Partial("_PlanPartial", plan)
+        }
+    </ul>
+</div>
+
+@section Scripts {
+    <script>
+        (function () {
+            var container = $('.plans-list')[0];
+            var msnry = new Masonry(container, {
+                itemSelector: '.plan-item'
+            });
+        }())
+    </script>
+}
