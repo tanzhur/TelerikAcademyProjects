@@ -1,0 +1,30 @@
+﻿#logging {
+    width: 200px;
+}
+
+.productImage {
+    width: 100px;
+}
+
+.product {
+    margin: 30px;
+    position:relative;
+    display:inline-block;
+}
+
+#main-content > div {
+    position:relative;
+    display:inline-block;
+}
+
+.navigation a {
+    margin-right:10px;
+    position:relative;
+    display:inline;
+}
+
+.product-in-basket {
+    margin: 30px;
+    position:relative;
+    display:inline-block;
+}

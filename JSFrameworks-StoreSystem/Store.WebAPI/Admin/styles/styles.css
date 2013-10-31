@@ -1,0 +1,80 @@
+﻿html,
+body,
+div,
+h1,
+a,
+ul,
+li {
+    margin: 0;
+    padding: 0;
+}
+
+body,
+html {
+    height: 100%;
+    font-family: 'Segoe UI';
+}
+
+#wrapper {
+    width: 820px;
+    height: 100%;
+    padding: 20px;
+    margin: 0 auto;
+    background: #9ee;
+    -webkit-box-shadow: 0 0 15px #000;
+    box-shadow: 0 0 15px #000;
+}
+
+ul {
+    list-style: none;
+}
+
+h1 {
+    text-align: center;
+    background: #fcc;
+    width: 860px;
+    margin: -20px -20px 0 -20px;
+    -webkit-box-shadow: 0 2px 2px #788;
+    box-shadow: 0 3px 2px #888;
+    color: #777;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+a:hover {
+    color: #c00;
+}
+
+#admin-login-form {
+    margin-top: 35px;
+}
+
+#login-btn,
+#logout-btn,
+#register-btn,
+#login-link-btn,
+#register-link-btn,
+#get-users-btn,
+#categories-btn,
+#category-create-btn {
+    background: #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 200px;
+}
+
+#login-btn:hover,
+#logout-btn:hover,
+#register-btn:hover,
+#login-link-btn:hover,
+#register-link-btn:hover,
+#get-users-btn:hover,
+#categories-btn:hover,
+#category-create-btn:hover {
+    background: #00b;
+    color: #fff;
+}
+

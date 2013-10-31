@@ -1,0 +1,14 @@
+﻿<br />
+<a href="#/admin/register" id="register-link-btn">Register Admin</a>
+<a href="#/users" id="get-users-btn">Get All Users</a>
+<a href="#/categories" id="categories-btn">Categories</a>
+<a href="#" id="logout-btn" ng-click="logoutAdmin()">Logout</a>
+
+<br /><br /><br />
+Username - IsAdmin
+<br /><br />
+<ul id="users-list">
+    <li ng-repeat="user in users">
+        <a href="#/users/{{user.Id}}">{{user.Username}} - {{user.IsAdmin}}</a>
+    </li>
+</ul>

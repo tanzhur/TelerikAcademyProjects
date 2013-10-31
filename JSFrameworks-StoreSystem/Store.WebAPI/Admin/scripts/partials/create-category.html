@@ -1,0 +1,20 @@
+﻿<br />
+<a href="#/admin/register" id="register-link-btn">Register Admin</a>
+<a href="#/users" id="get-users-btn">Get All Users</a>
+<a href="#/categories" id="categories-btn">Categories</a>
+<a href="#" id="logout-btn" ng-click="logoutAdmin()">Logout</a>
+
+<form id="admin-login-form">
+    <label for="tb-category-name">Name Category</label>
+    <input type="text" id="tb-category-name" ng-model="category.name" />
+    <br />
+    <label for="tb-imageSource">Iimage Source</label>
+    <input type="text" id="tb-imageSource" ng-model="category.imageSource" />
+    <br />
+    <label for="tb-description">Description</label>
+    <input type="text" id="tb-description" ng-model="category.description" />
+    <br />
+
+    <br />
+    <a href="#/categories" id="category-create-btn" ng-click="createCategory()">Create</a>
+</form>
